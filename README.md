@@ -1,18 +1,36 @@
-ansible-roles-dns
-=================
+## dns [![Build Status](https://travis-ci.org/Oefenweb/ansible-dns.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-dns)
 
-Ansible host for configure DNS
+Set up dns in Debian-like systems.
 
-# Examples :
+#### Requirements
+
+None
+
+#### Variables
+
+None
+
+## Dependencies
+
+None
+
+#### Example
+
+```yaml
+---
+- hosts: all
+  roles:
+  - dns
 ```
--  host: all
-   role : dns
-   dns_domain: localdomain
-   dns_nameservers: ['127.0.0.1', '8.8.8.8']
 
--  host: all
-   role : dns
-   dns_nameservers: ['8.8.8.8']  
-   dns_searchs: "localdomain otherdomain"
+#### License
 
-```
+MIT
+
+#### Author Information
+
+Mischa ter Smitten (based on work of jdauphant)
+
+#### Feedback, bug-reports, requests, ...
+
+Are [welcome](https://github.com/Oefenweb/ansible-dns/issues)!
