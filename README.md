@@ -30,7 +30,7 @@ None
 
 #### License
 
-MIT
+BSD
 
 #### Author Information
 
