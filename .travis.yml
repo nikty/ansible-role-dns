@@ -26,5 +26,14 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
+  # Test (primary) dns server
+  - >
+    nslookup 127.0.0.1
+    | grep -q 'Server'
+    | awk '{print $2}'
+    | grep -q '8.8.8.8'
+    && (echo 'Configuration test: pass' && exit 0)
+    || (echo 'Configuration test: fail' && exit 1)
+
 notifications:
   email: false
