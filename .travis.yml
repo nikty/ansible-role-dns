@@ -5,6 +5,9 @@ python: "2.7"
 before_install:
   - sudo apt-get update -qq
 
+  # Install dnsutils (for nslookup)
+  - sudo apt-get install dnsutils
+
 install:
   # Install Ansible.
   - pip install ansible
