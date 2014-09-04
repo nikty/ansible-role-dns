@@ -32,7 +32,7 @@ script:
   # Test (primary) dns server
   - >
     nslookup 127.0.0.1
-    | grep -q 'Server'
+    | grep 'Server'
     | awk '{print $2}'
     | grep -q '8.8.8.8'
     && (echo 'Configuration test: pass' && exit 0)
