@@ -6,5 +6,12 @@ dns_nameservers:
   - 8.8.8.8
   - 8.8.4.4
 dns_searches: []
-dns_dhclient_rule: supersede
+dns_dhclient_rules:
+  domain-name:
+    rule: supersede
+  domain-name-servers:
+    rule: prepend
+  domain-search:
+    rule: supersede
+
 dns_dhclient_file: /etc/dhcp/dhclient.conf
