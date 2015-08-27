@@ -1,5 +1,5 @@
----
 # tasks file for dns
+---
 - name: remove resolvconf
   apt:
     name: resolvconf
@@ -22,7 +22,7 @@
 - name: check dhclient file stats
   fail:
     msg: "dhclient file not found"
-  when: dhclient_file_stats.stat.exists == False
+  when: dhclient_file_stats.stat.exists == false
   tags: [configuration, dns, dns-dhclient-file-stats]
 
 - name: configure dns servers - dhclient file
