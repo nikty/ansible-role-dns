@@ -28,7 +28,7 @@
 - name: configure dns servers - dhclient file
   lineinfile:
     regexp: '^(.*)(supersede|prepend) {{ item.name }} (.*);$'
-    backrefs: yes
+    backrefs: true
     line: '\1{{ dns_dhclient_rules[item.name].rule }} {{ item.name }} {{ item.value }};'
     dest: "{{ dns_dhclient_file }}"
     state: present
