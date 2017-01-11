@@ -81,8 +81,6 @@ script:
     && (echo 'Configuration test: pass' && exit 0)
     || (echo 'Configuration test: fail' && exit 1)
 
-  - grep supersede domain-name /etc/dhcp/dhclient.conf
-
 notifications:
   email: false
   hipchat:
