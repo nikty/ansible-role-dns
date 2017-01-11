@@ -46,11 +46,11 @@
     state: present
   with_items:
     - name: 'domain-name'
-      value: '\"{{ dns_domain }}\"'
+      value: '"{{ dns_domain }}"'
     - name: 'domain-name-servers'
       value: '{% for dns_nameserver in dns_nameservers %}{{ dns_nameserver }}{% if not loop.last %}, {% endif %}{% endfor %}'
     - name: 'domain-search'
-      value: '{% for dns_search in dns_searches %}\"{{ dns_search }}\"{% if not loop.last %}, {% endif %}{% endfor %}'
+      value: '{% for dns_search in dns_searches %}"{{ dns_search }}"{% if not loop.last %}, {% endif %}{% endfor %}'
   when: item.value != ''
   tags:
     - configuration
