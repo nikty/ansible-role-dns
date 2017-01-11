@@ -27,7 +27,7 @@ None
 ---
 - hosts: all
   roles:
-  - dns
+    - dns
 ```
 
 #### License
@@ -36,7 +36,7 @@ BSD
 
 #### Author Information
 
-Mischa ter Smitten (based on work of jdauphant)
+Mischa ter Smitten (based on work of [jdauphant](https://github.com/jdauphant))
 
 #### Feedback, bug-reports, requests, ...
 
