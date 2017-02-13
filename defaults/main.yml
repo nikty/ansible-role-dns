@@ -14,4 +14,4 @@ dns_dhclient_rules:
   domain-search:
     rule: supersede
 
-dns_dhclient_file: "{{ '/etc/dhcp3/dhclient.conf' if ansible_distribution == 'Ubuntu' and ansible_distribution_version | version_compare('10.04', '==') else '/etc/dhcp/dhclient.conf' }}"
+dns_dhclient_file: /etc/dhcp/dhclient.conf
