@@ -10,6 +10,16 @@
     - dns
     - dns-remove-resolvconf
 
+- name: remove resolvconf symlink
+  file:
+    path: /etc/resolv.conf
+    state: absent
+  when: dns_remove_resolvconf
+  tags:
+    - configuration
+    - dns
+    - dns-remove-resolvconf
+
 - name: configure dns servers - /etc/resolv.conf
   template:
     src: etc/resolv.conf.j2
