@@ -10,11 +10,15 @@
     - dns
     - dns-remove-resolvconf
 
+- stat:
+    path: /etc/resolv.conf
+  register: stat_resolvconf
+
 - name: remove resolvconf symlink
   file:
     path: /etc/resolv.conf
     state: absent
-  when: dns_remove_resolvconf
+  when: dns_remove_resolvconf and stat_resolvconf.stat.islnk is defined and stat_resolvconf.stat.islnk
   tags:
     - configuration
     - dns
