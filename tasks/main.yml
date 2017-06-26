@@ -10,10 +10,30 @@
     - dns
     - dns-remove-resolvconf
 
+- name: get resolvconf file stats
+  stat:
+    path: "{{ dns_resolvconf_file }}"
+  register: _resolvconf_file_stats
+  when: dns_remove_resolvconf
+  tags:
+    - configuration
+    - dns
+    - dns-resolvconf-file-stats
+
+- name: remove resolvconf symlink
+  file:
+    path: "{{ dns_resolvconf_file }}"
+    state: absent
+  when: dns_remove_resolvconf and _resolvconf_file_stats is defined and _resolvconf_file_stats.stat is defined and _resolvconf_file_stats.stat.islnk
+  tags:
+    - configuration
+    - dns
+    - dns-remove-resolvconf
+
 - name: configure dns servers - /etc/resolv.conf
   template:
     src: etc/resolv.conf.j2
-    dest: /etc/resolv.conf
+    dest: "{{ dns_resolvconf_file }}"
   tags:
     - configuration
     - dns
