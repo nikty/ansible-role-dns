@@ -6,6 +6,7 @@ dns_nameservers:
   - 8.8.8.8
   - 8.8.4.4
 dns_searches: []
+dns_options: []
 dns_dhclient_rules:
   domain-name:
     rule: supersede
