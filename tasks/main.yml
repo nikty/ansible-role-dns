@@ -24,7 +24,11 @@
   file:
     path: "{{ dns_resolvconf_file }}"
     state: absent
-  when: dns_remove_resolvconf and _resolvconf_file_stats is defined and _resolvconf_file_stats.stat is defined and _resolvconf_file_stats.stat.islnk
+  when:
+    - dns_remove_resolvconf
+    - _resolvconf_file_stats is defined
+    - _resolvconf_file_stats.stat is defined
+    - _resolvconf_file_stats.stat.islnk
   tags:
     - configuration
     - dns
@@ -51,7 +55,7 @@
 - name: check dhclient file stats
   fail:
     msg: "dhclient file not found"
-  when: _dhclient_file_stats.stat.exists == false
+  when: not _dhclient_file_stats.stat.exists
   tags:
     - configuration
     - dns
@@ -71,7 +75,7 @@
       value: '{% for dns_nameserver in dns_nameservers %}{{ dns_nameserver }}{% if not loop.last %}, {% endif %}{% endfor %}'
     - name: 'domain-search'
       value: '{% for dns_search in dns_searches %}"{{ dns_search }}"{% if not loop.last %}, {% endif %}{% endfor %}'
-  when: item.value != ''
+  when: item.value
   tags:
     - configuration
     - dns
