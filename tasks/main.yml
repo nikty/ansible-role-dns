@@ -38,6 +38,7 @@
   template:
     src: etc/resolv.conf.j2
     dest: "{{ dns_resolvconf_file }}"
+    mode: 0644
   tags:
     - configuration
     - dns

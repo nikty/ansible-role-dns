@@ -1,6 +1,7 @@
 ## dns
 
-[![Build Status](https://travis-ci.org/Oefenweb/ansible-dns.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-dns) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-dns-blue.svg)](https://galaxy.ansible.com/Oefenweb/dns)
+[![Build Status](https://travis-ci.org/Oefenweb/ansible-dns.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-dns)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-dns-blue.svg)](https://galaxy.ansible.com/Oefenweb/dns)
 
 Set up dns in Debian-like systems.
 
