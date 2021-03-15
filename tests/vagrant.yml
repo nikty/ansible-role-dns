@@ -1,4 +1,4 @@
-# test file for dns
+# test file
 ---
 - hosts: all
   remote_user: vagrant

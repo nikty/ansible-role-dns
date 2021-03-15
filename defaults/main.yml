@@ -1,4 +1,4 @@
-# defaults file for dns
+# defaults file
 ---
 dns_remove_resolvconf: true
 dns_domain: ''

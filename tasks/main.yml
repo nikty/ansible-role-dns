@@ -1,4 +1,4 @@
-# tasks file for dns
+# tasks file
 ---
 - name: remove resolvconf
   apt:

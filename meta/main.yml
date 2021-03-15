@@ -1,6 +1,7 @@
-# meta file for dns
+# meta file
 ---
 galaxy_info:
+  namespace: oefenweb
   role_name: dns
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
