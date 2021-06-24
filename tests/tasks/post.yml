@@ -10,7 +10,7 @@
 
 - name: test dns installation
   shell: >
-    nslookup 127.0.0.1
+    nslookup example.com
     | grep 'Server'
     | awk '{print $2}'
     | grep -q '8.8.8.8'
