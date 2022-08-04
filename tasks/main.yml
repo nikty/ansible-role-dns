@@ -1,7 +1,7 @@
 # tasks file
 ---
 - name: remove resolvconf
-  apt:
+  ansible.builtin.apt:
     name: resolvconf
     state: absent
   when: dns_remove_resolvconf
@@ -11,7 +11,7 @@
     - dns-remove-resolvconf
 
 - name: get resolvconf file stats
-  stat:
+  ansible.builtin.stat:
     path: "{{ dns_resolvconf_file }}"
   register: _resolvconf_file_stats
   when: dns_remove_resolvconf
@@ -21,7 +21,7 @@
     - dns-resolvconf-file-stats
 
 - name: remove resolvconf symlink
-  file:
+  ansible.builtin.file:
     path: "{{ dns_resolvconf_file }}"
     state: absent
   when:
@@ -35,7 +35,7 @@
     - dns-remove-resolvconf
 
 - name: configure dns servers - /etc/resolv.conf
-  template:
+  ansible.builtin.template:
     src: etc/resolv.conf.j2
     dest: "{{ dns_resolvconf_file }}"
     mode: 0644
@@ -45,7 +45,7 @@
     - dns-configure-resolvconf
 
 - name: get dhclient file stats
-  stat:
+  ansible.builtin.stat:
     path: "{{ dns_dhclient_file }}"
   register: _dhclient_file_stats
   tags:
@@ -54,7 +54,7 @@
     - dns-dhclient-file-stats
 
 - name: check dhclient file stats
-  fail:
+  ansible.builtin.fail:
     msg: "dhclient file not found"
   when: not _dhclient_file_stats.stat.exists
   tags:
@@ -62,8 +62,8 @@
     - dns
     - dns-dhclient-file-stats
 
-- name: configure dns servers - dhclient file
-  lineinfile:
+- name: configure dns servers - dhclient file  # noqa var-spacing
+  ansible.builtin.lineinfile:
     regexp: '^(.*)(supersede|prepend) {{ item.name }} (.*);$'
     backrefs: true
     line: '\1{{ dns_dhclient_rules[item.name].rule }} {{ item.name }} {{ item.value }};'
