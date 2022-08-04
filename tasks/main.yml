@@ -62,7 +62,7 @@
     - dns
     - dns-dhclient-file-stats
 
-- name: configure dns servers - dhclient file
+- name: configure dns servers - dhclient file  # noqa var-spacing
   ansible.builtin.lineinfile:
     regexp: '^(.*)(supersede|prepend) {{ item.name }} (.*);$'
     backrefs: true
