@@ -16,6 +16,8 @@ None
 * `dns_nameservers` [default: `[8.8.8.8, 8.8.4.4]`]: Internet address(es) (in dot notation) of name servers that the resolver should query
 * `dns_searches` [default: `[]`]: Search list for host-name lookup. The search list is normally determined from the local domain name; by default, it contains only the local domain name
 * `dns_options` [default: `[]`]: Additional resolv.conf options, [see](http://manpages.ubuntu.com/manpages/xenial/en/man5/resolv.conf.5.html)
+* `dns_dhclient_configure` [default: `False`]: Whether to configure dhclient.conf
+* `dns_dhclient_dont_modify_resolvconf` [defaut: `True`]: Whether to stop dhclient from modifying resolv.conf.
 * `dns_dhclient_rules` [default: `supersede` for `domain-name`, `prepend` for `domain-name-servers` and `supersede` for `domain-search`]: see http://manpages.ubuntu.com/manpages/precise/man5/dhclient.conf.5.html
 * `dns_dhclient_file` [default: `/etc/dhcp/dhclient.conf`]: The location of the dhclient configuration file
 

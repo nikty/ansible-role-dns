@@ -1,0 +1,58 @@
+- block:
+    - name: get dhclient file stats
+      ansible.builtin.stat:
+        path: "{{ dns_dhclient_file }}"
+      register: _dhclient_file_stats
+      tags:
+        - configuration
+        - dns
+        - dns-dhclient-file-stats
+    
+    - name: check dhclient file stats
+      ansible.builtin.fail:
+        msg: "dhclient file not found"
+      when: not _dhclient_file_stats.stat.exists
+      tags:
+        - configuration
+        - dns
+        - dns-dhclient-file-stats
+    
+    - name: configure dns servers - dhclient file  # noqa var-spacing
+      ansible.builtin.lineinfile:
+        regexp: '^(.*)(supersede|prepend) {{ item.name }} (.*);$'
+        backrefs: true
+        line: '\1{{ dns_dhclient_rules[item.name].rule }} {{ item.name }} {{ item.value }};'
+        dest: "{{ dns_dhclient_file }}"
+        state: present
+      with_items:
+        - name: 'domain-name'
+          value: '"{{ dns_domain }}"'
+        - name: 'domain-name-servers'
+          value: '{% for dns_nameserver in dns_nameservers %}{{ dns_nameserver }}{% if not loop.last %}, {% endif %}{% endfor %}'
+        - name: 'domain-search'
+          value: '{% for dns_search in dns_searches %}"{{ dns_search }}"{% if not loop.last %}, {% endif %}{% endfor %}'
+      when: >-
+        item.value
+        and dns_configure_dhclient_file
+      tags:
+        - configuration
+        - dns
+        - dns-configure-dhclient-file
+  when: >-
+    dns_dhclient_configure | bool
+    and not (dns_dhclient_dont_modify_resolvconf | bool)
+    
+- block:
+    - name: Stop dhclient from modifying resolv.conf
+      copy:
+        content: |
+          make_resolv_conf() { :; }
+      dest: /etc/dhcp/dhclient-enter-hooks.d/leave_my_resolv_conf_alone
+
+    - name: Set file mode
+      file:
+        path: /etc/dhcp/dhclient-enter-hooks.d/leave_my_resolv_conf_alone
+        mode: 0755
+  when: >-
+    dns_dhclient_configure | bool
+    and dns_dhclient_dont_modify_resolvconf | bool
